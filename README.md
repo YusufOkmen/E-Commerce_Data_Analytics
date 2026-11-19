@@ -121,7 +121,10 @@ To mimic real-world conditions, the following kinds of errors were deliberately 
 
 | Issue | How it was introduced | How the pipeline fixes it |
 |---|---|---|
-| *(fill in)* | *(fill in)* | *(fill in)* |
+| **Duplicate Orders** | Injected 500 duplicate `order_id` rows to simulate double-fired webhook events. | Deduplicated in SQL using `ROW_NUMBER() OVER (PARTITION BY order_id)` to keep only the latest record. |
+| **Locale Decimal Formatting** | Converted 2% of numeric prices from periods to commas (e.g., `190.40` to `190,40`). | Standardized strings and enforced numeric types using `CAST(REPLACE(price, ',', '.') AS DECIMAL(10,2))`. |
+| **Orphan Payments** | Added 100 payment records referencing non-existent order IDs (`orphan_order_0` to `99`). | Isolated via `LEFT JOIN` anti-join and quarantined into the `audit_payment_discrepancies` table instead of deleting. |
+| **Payment Value Anomalies** | Altered payment amounts and retained zero-value transactions to create reconciliation gaps. | Flagged `payment_value <= 0` and mismatched records into `audit_payment_discrepancies` for finance review. |
 
 ## Data Model
 
