@@ -147,10 +147,11 @@ Total Revenue = SUM(FactOrders[Revenue])
 
 ## Key Insights
 
-<!-- TODO: Add 3-5 concrete findings from your dashboard, with numbers where possible, for example:
-- The category with the highest revenue is ...
-- Average delivery time is ... days, and ...
--->
+* **Budget Performance:** Overall revenue reached **$13.6M** against a **$13.9M** target (**97.7% attainment**) with an Average Order Value (AOV) of **$137.75**. Top-performing categories by revenue were `health_beauty` and `watches_gifts`, while `computers` (106.4%) and `sports_leisure` (102.1%) exceeded their targets.
+* **Operational Efficiency:** Across **99K+** total orders, the fulfillment pipeline achieved a **97.0% delivery success rate** (96,478 delivered orders) and kept cancellations/unavailable orders around **1.2%**.
+* **Regional Concentration:** Revenue is heavily concentrated in Brazil's Southeast region, with **São Paulo (SP)**, **Rio de Janeiro (RJ)**, and **Minas Gerais (MG)** driving the majority of net delivered sales.
+* **"Trojan Horse" Product Risk:** While the company-wide average rating is **4.09**, isolating high-volume, low-rated items ($\ge 10$ units sold, $< 3.0$ stars) exposed **1,159 units** generating **$190.2K** in revenue at a **2.54 average rating**—including a single `baby` category SKU generating **$38.9K** with a **2.68** score.
+* **Payment Reconciliation:** The automated SQL audit layer quarantined **109 anomalous payment records** (100 orphan payments with no parent order and 9 zero-value mismatches), flagging **$18.62K** in unreconciled financial risk for review.
 
 ## Tech Stack
 
